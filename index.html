@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مطعم الصحة | قائمة الطعام الصحية</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.moyasar.com/mpf/1.13.0/moyasar.css" />
+    <script src="https://cdn.moyasar.com/mpf/1.13.0/moyasar.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Tajawal', sans-serif; scroll-behavior: smooth; }
+        .mysr-form { margin-top: 20px; border-radius: 15px; overflow: hidden; border: 1px solid #e2e8f0; }
+        .product-card:hover { transform: translateY(-5px); transition: all 0.3s ease; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-3xl font-black text-teal-600">مطعم الصحة</h1>
+            <button onclick="scrollToCart()" class="bg-teal-50 px-4 py-2 rounded-full text-teal-600 font-bold border border-teal-200 flex items-center gap-2 hover:bg-teal-100 transition">
+                <span>🛒 السلة</span>
+                <span id="cart-count" class="bg-teal-600 text-white px-2 rounded-full text-sm">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <header class="bg-teal-600 text-white py-24 px-6 text-center">
+        <h2 class="text-5xl font-extrabold mb-4">صحتك تبدأ من طبقك</h2>
+        <p class="text-xl opacity-90 max-w-2xl mx-auto">نقدم لك أجود أنواع السلطات العضوية والمياه القلوية المنعشة طازجة يومياً.</p>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 py-16">
+        <h3 class="text-3xl font-bold mb-12 text-center text-teal-800">قائمة الطعام الصحية</h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div class="product-card bg-white rounded-3xl shadow-lg overflow-hidden">
+                <img src="image_9.png" alt="سلطة الدجاج" class="h-64 w-full object-cover">
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-2">
+                        <h4 class="text-2xl font-bold">سلطة الدجاج والأفوكادو</h4>
+                        <span class="text-teal-600 font-black text-xl">52 ريال</span>
+                    </div>
+                    <p class="text-gray-500 text-sm mb-6 leading-relaxed">صدر دجاج مشوي، أفوكادو، طماطم كرزية، لوز محمص، وصوص ليمون طازج.</p>
+                    <button onclick="addToCart('سلطة الدجاج والأفوكادو', 52)" class="w-full bg-teal-600 text-white py-4 rounded-2xl font-bold hover:bg-teal-700 transition shadow-lg shadow-teal-100">إضافة للسلة</button>
+                </div>
+            </div>
+
+            <div class="product-card bg-white rounded-3xl shadow-lg overflow-hidden">
+                <img src="image_10.png" alt="سلطة الكينوا" class="h-64 w-full object-cover">
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-2">
+                        <h4 class="text-2xl font-bold">سلطة الكينوا المتوسطية</h4>
+                        <span class="text-teal-600 font-black text-xl">48 ريال</span>
+                    </div>
+                    <p class="text-gray-500 text-sm mb-6 leading-relaxed">كينوا عضوية، جبنة فيتا، زيتون، ريحان، وحمص مع صوص بالسميك.</p>
+                    <button onclick="addToCart('سلطة الكينوا المتوسطية', 48)" class="w-full bg-teal-600 text-white py-4 rounded-2xl font-bold hover:bg-teal-700 transition shadow-lg shadow-teal-100">إضافة للسلة</button>
+                </div>
+            </div>
+
+            <div class="product-card bg-white rounded-3xl shadow-lg overflow-hidden">
+                <img src="image_11.png" alt="مياه قلوية" class="h-64 w-full object-cover">
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-2">
+                        <h4 class="text-2xl font-bold">مياه قلوية منعشة</h4>
+                        <span class="text-teal-600 font-black text-xl">15 ريال</span>
+                    </div>
+                    <p class="text-gray-500 text-sm mb-6 leading-relaxed">مياه معدنية قلوية منقوعة بشرائح الخيار والنعناع البارد والليمون.</p>
+                    <button onclick="addToCart('مياه قلوية منعشة', 15)" class="w-full bg-teal-600 text-white py-4 rounded-2xl font-bold hover:bg-teal-700 transition shadow-lg shadow-teal-100">إضافة للسلة</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="checkout-section" class="mt-20 bg-white p-8 md:p-12 rounded-[40px] shadow-2xl border border-teal-100 max-w-3xl mx-auto hidden">
+            <h3 class="text-3xl font-extrabold mb-8 text-center text-gray-800">ملخص طلبك</h3>
+            
+            <div id="cart-items" class="mb-10 space-y-4">
+                </div>
+
+            <div class="flex justify-between items-center border-t border-gray-100 pt-8 mb-10">
+                <span class="text-2xl font-bold text-gray-600">المجموع النهائي:</span>
+                <span id="total-price" class="text-4xl font-black text-teal-600">0 ريال</span>
+            </div>
+            
+            <div id="payment-area">
+                <button id="show-payment-btn" onclick="initMoyasar()" class="w-full bg-black text-white py-6 rounded-3xl flex items-center justify-center gap-3 hover:bg-gray-900 transition-all shadow-xl">
+                    <span class="text-xl font-bold">إتمام الطلب بواسطة  Pay</span>
+                </button>
+                <div class="mysr-form"></div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let cart = [];
+        let total = 0;
+
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            total += price;
+            updateUI();
+            
+            // إضافة اهتزاز بسيط للزر للتنبيه (اختياري)
+            if (cart.length === 1) scrollToCart();
+        }
+
+        function removeFromCart(index) {
+            total -= cart[index].price;
+            cart.splice(index, 1);
+            updateUI();
+        }
+
+        function scrollToCart() {
+            if (cart.length > 0) {
+                document.getElementById('checkout-section').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function updateUI() {
+            document.getElementById('cart-count').innerText = cart.length;
+            const checkoutSection = document.getElementById('checkout-section');
+            const cartItemsList = document.getElementById('cart-items');
+            const totalPriceSpan = document.getElementById('total-price');
+
+            if (cart.length > 0) {
+                checkoutSection.classList.remove('hidden');
+                cartItemsList.innerHTML = cart.map((item, index) => `
+                    <div class="flex justify-between items-center bg-gray-50 p-4 rounded-2xl">
+                        <span class="font-bold text-lg">${item.name}</span>
+                        <div class="flex items-center gap-6">
+                            <span class="font-bold text-teal-600">${item.price} ريال</span>
+                            <button onclick="removeFromCart(${index})" class="text-red-500 hover:text-red-700 bg-red-50 p-2 rounded-lg transition">حذف</button>
+                        </div>
+                    </div>
+                `).join('');
+                totalPriceSpan.innerText = total + " ريال";
+            } else {
+                checkoutSection.classList.add('hidden');
+            }
+        }
+
+        // دالة ربط ميسر الرسمية
+        function initMoyasar() {
+            if (total <= 0) return;
+            
+            // إخفاء زر الدفع القديم ليظهر مكانه نموذج ميسر
+            document.getElementById('show-payment-btn').style.display = 'none';
+
+            Moyasar.init({
+                element: '.mysr-form',
+                amount: total * 100, // ميسر يحسب بالهللة (مثال: 50 ريال = 5000 هللة)
+                currency: 'SAR',
+                description: 'طلب من مطعم الصحة',
+                publishable_api_key: 'pk_test_p1QgepMBGL8pGv9VWxi5PHbthbNFMhvQRgorxnMx', // <--- ضعي مفتاحك هنا
+                callback_url: window.location.href,
+                methods: ['applepay', 'creditcard'],
+                apple_pay: {
+                    label: 'مطعم الصحة',
+                    validate_merchant_url: 'https://api.moyasar.com/v1/applepay/initiate',
+                    country: 'SA' // هذا السطر هو الحل لمشكلة Country is required
+                }
+            });
+        }
+    </script>
+</body>
+</html>
